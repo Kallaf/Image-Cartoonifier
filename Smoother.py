@@ -1,7 +1,7 @@
 import cv2 as cv
 
 
-def smooth(img):
+def smooth(img, img_dir):
     width = img.shape[1]
     height = img.shape[0]
     dim = (200, 200)
@@ -14,4 +14,7 @@ def smooth(img):
     # resize back
     dim = (width, height)
 
-    return cv.resize(smoothed, dim, interpolation = cv.INTER_AREA)
+    smoothed = cv.resize(smoothed, dim, interpolation = cv.INTER_AREA)
+    cv.imwrite(img_dir + "smoothed.jpg", smoothed)
+
+    return smoothed
