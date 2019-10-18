@@ -7,12 +7,12 @@ from Edge_detector import detect_edge
 original = cv.imread('original.png')
 
 # Image Processing
-edge_detected =  detect_edge(original)
-smoothed = smooth(original)
-cartoonified = smoothed#cv.bitwise_and(edge_detected, smoothed)
+thresh = detect_edge(original)
+cv.imwrite("thresh2.jpg", thresh)
 
-# Show images
-cv.imshow("Original",original)
-cv.imshow("Cartoonified",cartoonified)
-cv.waitKey(0)
-cv.destroyAllWindows()
+smoothed = smooth(original)
+cv.imwrite("smoothed.jpg", smoothed)
+
+thresh = cv.cvtColor(thresh, cv.COLOR_GRAY2BGR)
+cartoon = cv.bitwise_and(smoothed, thresh)
+cv.imwrite("cartoon.jpg", cartoon)
